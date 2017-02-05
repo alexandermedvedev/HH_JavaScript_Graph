@@ -18,7 +18,6 @@ loopExample.a = new Vertex(['b'], function([b]) {return b++});
 loopExample.b = new Vertex(['a'], function([a]) {return a++});
 
 function lazyCalculation(vertexName, graph){
-	console.log("Start calculation of " + vertexName);
 	var v = graph[vertexName];
 	
 	if (v === undefined){
@@ -41,13 +40,11 @@ function lazyCalculation(vertexName, graph){
 				dependenciesResults.push(lazyCalculation(v.dependencies[i], graph));
 			} 
 			else{
-				console.log("Calculating " + vertexName + ": vertex " + v.dependencies[i] + " was calculated before");
 				dependenciesResults.push(graph[v.dependencies[i]].result);
 			}
 		}
 		
 		v.result = v.calculatedFunction(dependenciesResults);
-		console.log("Finish calculation of " + vertexName);
 	}
 	
 	v.isCheckingForLoop = false;
@@ -64,35 +61,11 @@ function calculateAll(graph){
 //console.log("a: ", lazyCalculation('a', loopExample));
 //console.log("a: ", lazyCalculation('a', example));
 
-/*
-console.log("xs.result: " + example.xs.result);
-console.log("n.result: " + example.n.result);
-console.log("m.result: " + example.m.result);
-console.log("m2.result: " + example.m2.result);
-console.log("v.result: " + example.v.result);
-console.log();
-
 //console.log("xs: ", lazyCalculation('xs', example));
 //console.log("n: ", lazyCalculation('n', example));
-
-console.log("m: ", lazyCalculation('m', example));
-console.log("xs.result: " + example.xs.result);
-console.log("n.result: " + example.n.result);
-console.log("m.result: " + example.m.result);
-console.log("m2.result: " + example.m2.result);
-console.log("v.result: " + example.v.result);
-console.log();
-
+//console.log("m: ", lazyCalculation('m', example));
 //console.log("m2: ", lazyCalculation('m2', example));
-
-console.log("v: ", lazyCalculation('v', example));
-console.log("xs.result: " + example.xs.result);
-console.log("n.result: " + example.n.result);
-console.log("m.result: " + example.m.result);
-console.log("m2.result: " + example.m2.result);
-console.log("v.result: " + example.v.result);
-console.log();
-*/
+//console.log("v: ", lazyCalculation('v', example));
 
 /*
 console.log("Calculate all started");
